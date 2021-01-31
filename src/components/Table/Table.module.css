@@ -9,3 +9,11 @@
 .tableHead {
   display: flex;
 }
+
+.tableContainer {
+  width: 90%;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  overflow: scroll;
+}

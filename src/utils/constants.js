@@ -1,6 +1,7 @@
 import faker from 'faker';
 
 export const titleList = [
+  'Order',
   'Account',
   'Account Name',
 	'Email',
@@ -18,6 +19,7 @@ export const titleList = [
 ];
 
 export const pathList = [
+  'order',
   'account',
   'accountName',
   'email',
@@ -95,4 +97,21 @@ export const dataMappingList = [
     pathList: 'transactionDescription',
     generateData: faker.finance.transactionDescription
   }
+];
+
+export const DEFAULT_ROW_HEIGHT = 100;
+export const DEFAULT_TOTAL_ITEMS = 1000000;
+export const DEFAULT_SCROLL_THRESHOLD = 3/4;
+
+export const MEDIUM_SIZE_COLUMNS = [
+  'amountHeading',
+  'amountData',
+  'currencyCodeHeading',
+  'currencyCodeData',
+  'currencyNameHeading',
+  'currencyNameData',
+  'creditCardCvvHeading',
+  'creditCardCVVData',
+  'transactionTypeHeading',
+  'transactionTypeData'
 ];
