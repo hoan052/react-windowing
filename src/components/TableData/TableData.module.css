@@ -1,0 +1,20 @@
+.tableData {
+  padding: 10px 0;
+  width: auto;
+  min-width: 20%;
+  text-align: center;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.tableData:first-child {
+  border-left: 1px solid #000;
+}
+
+.oddData {
+  background-color: #f7f7f9;
+}
+
+.evenData {
+  background-color: #fff;
+}

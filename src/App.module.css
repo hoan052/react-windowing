@@ -1,0 +1,26 @@
+.app {
+  text-align: center;
+}
+
+.container {
+  width: 800px;
+  padding: 40px 0;
+  margin: 0 auto;
+  text-align: center;
+  overflow: scroll;
+}
+
+.financeTable {
+  background-color: #fff;
+}
+
+.customTableHeading {
+  background-color: #4b8c74;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.customAmountHeading,
+.customAmountData {
+  min-width: 10%;
+}

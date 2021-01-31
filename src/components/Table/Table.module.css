@@ -1,0 +1,11 @@
+.table {
+  display: inline-block;
+}
+
+.tableRow {
+  display: flex;
+}
+
+.tableHead {
+  display: flex;
+}

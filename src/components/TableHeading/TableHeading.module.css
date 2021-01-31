@@ -1,0 +1,14 @@
+.tableHeading {
+  width: auto;
+  padding: 10px 0;
+  min-width: 20%;
+  font-weight: bold;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+}
+  
+.tableHeading:first-child {
+  border-left: 1px solid #000;
+}
+

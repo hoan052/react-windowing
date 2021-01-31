@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Table from './components/Table/Table';
+import { generateDataList } from './utils/dataUtils';
+import { titleList, pathList, dataMappingList } from './utils/constants';
+
+import css from './App.module.css';
+
+const dataList = generateDataList(dataMappingList);
+// Use customClassName prop we can fully control the style of the custom table
+const customClassName = {
+  table: css.financeTable,
+  tableHeading: css.customTableHeading,
+  amountHeading: css.customAmountHeading,
+  amountData: css.customAmountData
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={css.app}>
+      <div className={css.container}>
+        <Table
+          dataList={dataList}
+          pathList={pathList}
+          titleList={titleList}
+          customClassName={customClassName}
+        />
+      </div>
     </div>
   );
 }
