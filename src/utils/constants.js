@@ -31,7 +31,7 @@ export const pathList = [
 	'currencyCode',
 	'currencyName',
 	'creditCardNumver',
-	'creditCardCVV',
+	'creditCardCvv',
 	'transactionType',
 	'transactionDescription'
 ];
@@ -86,7 +86,7 @@ export const dataMappingList = [
     generateData: faker.finance.creditCardNumber
   },
   {
-    pathList: 'creditCardCVV',
+    pathList: 'creditCardCvv',
     generateData: faker.finance.creditCardCVV
   },
   {
@@ -100,10 +100,12 @@ export const dataMappingList = [
 ];
 
 export const DEFAULT_ROW_HEIGHT = 100;
-export const DEFAULT_TOTAL_ITEMS = 1000000;
+export const MAXIMUM_DEFAULT_TOTAL_ITEMS = 1000000;
 export const DEFAULT_SCROLL_THRESHOLD = 3/4;
 
 export const MEDIUM_SIZE_COLUMNS = [
+  'accountHeading',
+  'accountData',
   'amountHeading',
   'amountData',
   'currencyCodeHeading',
@@ -111,7 +113,7 @@ export const MEDIUM_SIZE_COLUMNS = [
   'currencyNameHeading',
   'currencyNameData',
   'creditCardCvvHeading',
-  'creditCardCVVData',
+  'creditCardCvvData',
   'transactionTypeHeading',
   'transactionTypeData'
 ];

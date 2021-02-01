@@ -7,9 +7,40 @@
 }
 
 .customTableHeading {
-  background-color: #4b8c74;
+  background-color: #28a745;
   color: #fff;
   text-transform: capitalize;
+}
+
+.btnGroup {
+  margin-top: 10px;
+}
+
+.btn {
+  color: #fff;
+  border: 1px solid #f8f9fa;
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 4px;
+  box-shadow: none;
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  outline: none;
+}
+
+.btnSuccess {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  margin-right: 10px;
+}
+
+.btnLight {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 
 

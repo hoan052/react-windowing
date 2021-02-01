@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import Table from './components/Table/Table';
 import { setStyleList } from './utils/styleUtils';
@@ -9,8 +10,8 @@ import {
   dataMappingList,
   DEFAULT_ROW_HEIGHT,
   MEDIUM_SIZE_COLUMNS,
-  DEFAULT_TOTAL_ITEMS,
-  DEFAULT_SCROLL_THRESHOLD
+  DEFAULT_SCROLL_THRESHOLD,
+  MAXIMUM_DEFAULT_TOTAL_ITEMS
 } from './utils/constants';
 
 import css from './App.module.css';
@@ -26,6 +27,7 @@ const customClassName = {
 
 function App() {
   const [dataList, setDataList] = useState([]);
+  const [isVisible, setVisible] = useState(false);
   const getInitialDataList = (totalItems) => {
     const dataList = generateDataList(dataMappingList, totalItems);
     setDataList(dataList);
@@ -38,18 +40,34 @@ function App() {
 
   return (
     <div className={css.app}>
-      <Table
-        totalItems={DEFAULT_TOTAL_ITEMS}
-        rowHeight={DEFAULT_ROW_HEIGHT}
-        scrollThreshold={DEFAULT_SCROLL_THRESHOLD}
-        dataList={dataList}
-        pathList={pathList}
-        titleList={titleList}
-        dataMappingFunc={dataMappingFunc}
-        getInitialDataList={getInitialDataList}
-        getMoreDataList={getMoreDataList}
-        customClassName={customClassName}
-      />
+      <div class={css.btnGroup}>
+        <button
+          onClick={() => setVisible(true)}
+          className={classNames(css.btn, css.btnSuccess)}
+        >
+          Show Table
+        </button>
+        <button
+          onClick={() => setVisible(false)}
+          className={classNames(css.btn, css.btnLight)}
+        >
+          Hide Table
+        </button>
+      </div>
+      <div class={css.tableSection}>
+        {isVisible && <Table
+          dataList={dataList}
+          pathList={pathList}
+          titleList={titleList}
+          rowHeight={DEFAULT_ROW_HEIGHT}
+          dataMappingFunc={dataMappingFunc}
+          getMoreDataList={getMoreDataList}
+          customClassName={customClassName}
+          getInitialDataList={getInitialDataList}
+          scrollThreshold={DEFAULT_SCROLL_THRESHOLD}
+          maxTotalItems={MAXIMUM_DEFAULT_TOTAL_ITEMS}
+        />}
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import TableData from '../TableData/TableData';
 import TableHeading from '../TableHeading/TableHeading';
-import { DEFAULT_TOTAL_ITEMS, DEFAULT_SCROLL_THRESHOLD } from '../../utils/constants'
+import { DEFAULT_SCROLL_THRESHOLD, MAXIMUM_DEFAULT_TOTAL_ITEMS } from '../../utils/constants'
 
 import css from './Table.module.css';
 
@@ -14,7 +14,7 @@ const Table = (props) => {
     dataList,
     rowHeight,
     titleList,
-    totalItems,
+    maxTotalItems,
     dataMappingFunc,
     scrollThreshold,
     customClassName,
@@ -24,14 +24,23 @@ const Table = (props) => {
   const tableContainerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState(0);
   const [initialTotalItems, setInitialTotalItems] = useState(0);
+  const getElementHeight = (ref) => {
+    const clientHeight = ref.current.clientHeight;
+    const containerStyle = window.getComputedStyle(ref.current);
+    const paddingTop = parseInt(containerStyle.paddingTop, 10);
+    const paddingBottom = parseInt(containerStyle.paddingBottom, 10);
+    return clientHeight - paddingTop - paddingBottom;
+  };
   const handleScrollEvent = () => {
     if (tableContainerRef && tableContainerRef.current) {
       const scrollTop = tableContainerRef.current.scrollTop;
-      const containerHeight = tableContainerRef.current.clientHeight;
+      const containerHeight = getElementHeight(tableContainerRef);
       const scrollHeight = tableContainerRef.current.scrollHeight;
 
-      if ((containerHeight + scrollTop) >= (scrollHeight * scrollThreshold) && dataList.length < totalItems) {
-        getMoreDataList && getMoreDataList(initialTotalItems);
+      if ((containerHeight + scrollTop) >= (scrollHeight * scrollThreshold) && dataList.length < maxTotalItems) {
+        const totalItems = dataList.length + initialTotalItems;
+        const numberOfItems = totalItems < maxTotalItems ? totalItems : maxTotalItems - dataList.length;
+        getMoreDataList && getMoreDataList(numberOfItems);
       }
     }
   };
@@ -41,8 +50,7 @@ const Table = (props) => {
       const domRect = tableContainerRef.current.getBoundingClientRect();
       const topOffset = domRect.top;
       const windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
-      // TODO: Need to calculate correctly container height
-      const containerHeight = tableContainerRef.current.clientHeight || windowHeight - topOffset;
+      const containerHeight = getElementHeight(tableContainerRef) || windowHeight - topOffset;
       const totalItems = Math.ceil(containerHeight / rowHeight);
 
       setContainerHeight(containerHeight);
@@ -57,7 +65,7 @@ const Table = (props) => {
     <div
       ref={tableContainerRef}
       onScroll={handleScrollEvent}
-      className={css.tableContainer}
+      className={classNames(css.tableContainer, customClassName.tableContainer)}
       style={{ height: containerHeight }}>
       {isDataList && <div className={classNames(css.table, customClassName.table)}>
         <div className={classNames(css.tableHead, customClassName.tableHead)}>
@@ -91,7 +99,7 @@ const Table = (props) => {
 };
 
 Table.propTypes = {
-  totalItems: PropTypes.number,
+  maxTotalItems: PropTypes.number,
   dataMappingFunc: PropTypes.func,
   scrollThreshold: PropTypes.number,
   getMoreDataList: PropTypes.func.isRequired,
@@ -106,7 +114,7 @@ TableHeading.defaultProps = {
   titleList: [],
   customClassName: {},
   dataMappingFunc: null,
-  totalItems: DEFAULT_TOTAL_ITEMS,
+  totalItems: MAXIMUM_DEFAULT_TOTAL_ITEMS,
   scrollThreshold: DEFAULT_SCROLL_THRESHOLD
 };
 
